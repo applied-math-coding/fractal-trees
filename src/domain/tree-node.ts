@@ -4,7 +4,8 @@ export class TreeNode {
   point: Point;
   childNodes: TreeNode[] = [];
 
-  constructor(point: Point) {
+  constructor(point: Point, childNodes?: TreeNode[]) {
     this.point = point;
+    this.childNodes = childNodes || [];
   }
 }

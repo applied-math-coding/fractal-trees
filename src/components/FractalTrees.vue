@@ -36,7 +36,12 @@
         </div>
         <div class="option">
           <div class="option-label">Angle:</div>
-          <InputNumber v-model="angleInDegree" showButtons :min="1" :max="180" />
+          <InputNumber
+            v-model="angleInDegree"
+            showButtons
+            :min="1"
+            :max="180"
+          />
         </div>
       </div>
       <div class="calc-button">
@@ -74,13 +79,14 @@ export default defineComponent({
   },
   methods: {
     handleCalculate() {
-      this.tree = fractalTreeService.calculate(this.treeParams);
-      this.renderTree();
-    },
-    async renderTree() {
       const c = this.$refs.canvas as HTMLCanvasElement;
+      const ctx = c.getContext("2d");
       clearCanvas(c);
-      fractalTreeService.paint(this.tree, c.getContext("2d"), c);
+      const g = fractalTreeService.calculate(this.treeParams);
+      let res: { value: TreeNode; done?: boolean };
+      while (!(res = g.next()).done) {
+        fractalTreeService.paint(res.value, ctx, c);
+      }
     },
   },
 });
