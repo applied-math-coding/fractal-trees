@@ -3,28 +3,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import FractalTrees from './components/FractalTrees.vue';
+import { defineComponent } from "vue";
+import FractalTrees from "./components/FractalTrees.vue";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
-    FractalTrees
-  }
+    FractalTrees,
+  },
 });
 </script>
 
 <style>
-:root{
+:root {
   --primary-text-color: #2c3e50;
   --secondary-text-color: #9e9e9e;
+  --small-font: 0.8rem;
+  --medium-font: 1.5rem;
+  --large-font: 2rem;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 
-body{
+body {
   padding: 0;
   margin: 0;
 }

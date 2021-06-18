@@ -45,7 +45,15 @@
         </div>
       </div>
       <div class="calc-button">
-        <Button label="Calculate!" @click="handleCalculate()" />
+        <Button
+          label="Calculate!"
+          :loading="calculating"
+          @click="handleCalculate()"
+        />
+      </div>
+      <div class="number-nodes-positioner">
+        <span class="number-nodes">{{ numberNodes }}</span>
+        <span class="number-nodes-label"> nodes</span>
       </div>
     </div>
   </div>
@@ -65,9 +73,15 @@ export default defineComponent({
     return {
       tree: new TreeNode(new Point(0, 0)),
       treeParams: new TreeParams(),
+      calculating: false,
     };
   },
   computed: {
+    numberNodes(): string {
+      return new Intl.NumberFormat().format(
+        this.treeParams.numberBranches ** this.treeParams.maxLevels
+      );
+    },
     angleInDegree: {
       get(): number {
         return Math.round((this.treeParams.angle * 180) / Math.PI);
@@ -79,6 +93,7 @@ export default defineComponent({
   },
   methods: {
     handleCalculate() {
+      this.calculating = true;
       const c = this.$refs.canvas as HTMLCanvasElement;
       const ctx = c.getContext("2d");
       clearCanvas(c);
@@ -89,6 +104,7 @@ export default defineComponent({
         fractalTreeService.paint(res.value, ctx, c);
       }
       ctx?.stroke();
+      this.calculating = false;
     },
   },
 });
@@ -118,7 +134,7 @@ function clearCanvas(c: HTMLCanvasElement) {
 }
 
 .option-label {
-  font-size: 0.8rem;
+  font-size: var(--small-font);
   color: var(--secondary-text-color);
   margin-bottom: 5px;
 }
@@ -145,7 +161,7 @@ canvas {
   }
 
   .main-title {
-    font-size: 2rem;
+    font-size: var(--large-font);
   }
 
   .calc-button {
@@ -154,6 +170,19 @@ canvas {
 
   .canvas-container {
     grid-row: 1;
+  }
+
+  .number-nodes-positioner {
+    margin-top: 10px;
+  }
+
+  .number-nodes {
+    font-size: var(--medium-font);
+  }
+
+  .number-nodes-label {
+    font-size: var(--small-font);
+    color: var(--secondary-text-color);
   }
 }
 </style>
