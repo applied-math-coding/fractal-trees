@@ -17,7 +17,6 @@ export class FractalTreeService {
     r.childNodes.forEach(tn => {
       ctx?.moveTo(...this.transToCanvasCoords(r.point, c));
       ctx?.lineTo(...this.transToCanvasCoords(tn.point, c));
-      ctx?.stroke();
     });
   }
 

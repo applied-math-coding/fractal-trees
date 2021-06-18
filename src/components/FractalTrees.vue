@@ -21,7 +21,7 @@
             v-model="treeParams.maxLevels"
             showButtons
             :min="2"
-            :max="10"
+            :max="20"
           />
         </div>
         <div class="option">
@@ -82,11 +82,13 @@ export default defineComponent({
       const c = this.$refs.canvas as HTMLCanvasElement;
       const ctx = c.getContext("2d");
       clearCanvas(c);
+      ctx?.beginPath();
       const g = fractalTreeService.calculate(this.treeParams);
       let res: { value: TreeNode; done?: boolean };
       while (!(res = g.next()).done) {
         fractalTreeService.paint(res.value, ctx, c);
       }
+      ctx?.stroke();
     },
   },
 });
