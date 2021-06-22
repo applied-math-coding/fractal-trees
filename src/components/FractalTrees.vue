@@ -46,6 +46,7 @@
       </div>
       <div class="calc-button">
         <Button
+          class="p-mr-2"
           label="Calculate!"
           :loading="calculating"
           @click="handleCalculate()"

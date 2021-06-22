@@ -6,23 +6,9 @@ set -e
 # build
 yarn build
 
-# navigate into the build output directory
-# cd dist
+# github page is setup to serve content in folder: docs
+# and hosted at path: https://applied-math-coding.github.io/fractal-trees/
+# that is, the public path for vue is: /fractal-trees/
 rm -rf docs
 mkdir docs
 cp -r dist/* docs
-
-# if you are deploying to a custom domain
-# echo 'www.example.com' > CNAME
-
-# git init
-# git add -A
-# git commit -m 'deploy'
-
-# if you are deploying to https://<USERNAME>.github.io
-# git push -f git@github.com:applied-math-coding/fractal-trees.git main
-
-# if you are deploying to https://<USERNAME>.github.io/<REPO>
-# git push -f git@github.com:<USERNAME>/<REPO>.git main:gh-pages
-
-cd -
