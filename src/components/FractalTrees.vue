@@ -50,6 +50,12 @@
           :loading="calculating"
           @click="handleCalculate()"
         />
+        <Button
+          class="p-button-danger"
+          label="Stop"
+          v-if="calculating"
+          @click="handleStop()"
+        />
       </div>
       <div class="number-nodes-positioner">
         <span class="number-nodes">{{ numberNodes }}</span>
@@ -74,6 +80,7 @@ export default defineComponent({
       tree: new TreeNode(new Point(0, 0)),
       treeParams: new TreeParams(),
       calculating: false,
+      interrupted: false,
     };
   },
   computed: {
@@ -92,16 +99,29 @@ export default defineComponent({
     },
   },
   methods: {
-    handleCalculate() {
+    handleStop() {
+      this.interrupted = true;
+    },
+    async handleCalculate() {
       this.calculating = true;
+      this.interrupted = false;
       const c = this.$refs.canvas as HTMLCanvasElement;
       const ctx = c.getContext("2d");
       clearCanvas(c);
       ctx?.beginPath();
+      let lastPaintStopTime = new Date().getTime();
       const g = fractalTreeService.calculate(this.treeParams);
       let res: { value: TreeNode; done?: boolean };
       while (!(res = g.next()).done) {
         fractalTreeService.paint(res.value, ctx, c);
+        const time = new Date().getTime();
+        if (time - lastPaintStopTime > 500) {
+          await new Promise<void>((r) => setTimeout(() => r()));
+          lastPaintStopTime = time;
+        }
+        if (this.interrupted) {
+          break;
+        }
       }
       ctx?.stroke();
       this.calculating = false;
