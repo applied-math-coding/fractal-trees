@@ -7,27 +7,35 @@ export class FractalTreeService {
   calculate(p: TreeParams): Generator<TreeNode> {
     return this.recCalc({
       prev: null,
-      cur: new TreeNode(p.startingPoint),
-      p,
-      level: 0
+      cur: new TreeNode(p.startingPoint, 0),
+      p
     });
   }
 
-  paint(r: TreeNode, ctx: CanvasRenderingContext2D | null, c: HTMLCanvasElement) {
+  paint(r: TreeNode, ctx: CanvasRenderingContext2D | null, c: HTMLCanvasElement, p: TreeParams) {
     r.childNodes.forEach(tn => {
+      if (p.colorize) {
+        ctx.beginPath();
+        ctx.strokeStyle = `hsl(${this.transformValueToHue(r.level, p.maxLevels)}, 50%, 50%)`;
+      }
       ctx?.moveTo(...this.transToCanvasCoords(r.point, c));
       ctx?.lineTo(...this.transToCanvasCoords(tn.point, c));
+      ctx.stroke();
     });
+  }
+
+  private transformValueToHue(v: number, maxValue: number): number {
+    return (1 - v / maxValue) * 240;
   }
 
   private transToCanvasCoords(p: Point, c: HTMLCanvasElement): [number, number] {
     return [c.width / 2 + p.x, c.height - p.y];
   }
 
-  private *recCalc({ prev, cur, p, level }:
-    { prev: TreeNode | null, cur: TreeNode, p: TreeParams, level: number })
+  private *recCalc({ prev, cur, p }:
+    { prev: TreeNode | null, cur: TreeNode, p: TreeParams })
     : Generator<TreeNode> {
-    prev = prev ?? new TreeNode(new Point(0, 0));
+    prev = prev ?? new TreeNode(new Point(0, 0), cur.level - 1);
     const curDirectionVec = this.addPoints(cur.point, this.multiplyScalar(-1, prev.point));  // curr - prev
     const numberOfSectors = p.numberBranches - 1;
     const totalAngle = numberOfSectors * p.angle;
@@ -40,17 +48,17 @@ export class FractalTreeService {
     for (let idx = 0; idx < p.numberBranches; idx++) {
       const newDirectionVec = this.rotate(baseDirectionVec, idx * p.angle);
       childNodes.push(new TreeNode(
-        this.addPoints(cur.point, newDirectionVec)
+        this.addPoints(cur.point, newDirectionVec),
+        cur.level + 1
       ));
     }
-    yield new TreeNode(cur.point, childNodes);
-    if (level + 1 < p.maxLevels) {
+    yield new TreeNode(cur.point, cur.level, childNodes);
+    if (cur.level + 1 < p.maxLevels) {
       for (const tn of childNodes) {
         yield* this.recCalc({
           prev: cur,
           cur: tn,
-          p,
-          level: level + 1
+          p
         });
       }
     }

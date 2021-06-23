@@ -6,4 +6,6 @@ export class TreeParams {
   numberBranches = 2;
   branchFactor = 0.75;
   maxLevels = 10;
+  colorize = false;
+  showLimitOnly = false;
 }

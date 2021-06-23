@@ -43,6 +43,10 @@
             :max="180"
           />
         </div>
+        <div class="option">
+          <div class="option-label">Colorize:</div>
+          <Checkbox v-model="treeParams.colorize" :binary="true" />
+        </div>
       </div>
       <div class="calc-button">
         <Button
@@ -78,7 +82,7 @@ export default defineComponent({
   name: "FractalTrees",
   data() {
     return {
-      tree: new TreeNode(new Point(0, 0)),
+      tree: new TreeNode(new Point(0, 0), -1),
       treeParams: new TreeParams(),
       calculating: false,
       interrupted: false,
@@ -114,7 +118,7 @@ export default defineComponent({
       const g = fractalTreeService.calculate(this.treeParams);
       let res: { value: TreeNode; done?: boolean };
       while (!(res = g.next()).done) {
-        fractalTreeService.paint(res.value, ctx, c);
+        fractalTreeService.paint(res.value, ctx, c, this.treeParams);
         const time = new Date().getTime();
         if (time - lastPaintStopTime > 500) {
           await new Promise<void>((r) => setTimeout(() => r()));
