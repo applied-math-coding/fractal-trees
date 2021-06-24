@@ -7,5 +7,5 @@ export class TreeParams {
   branchFactor = 0.75;
   maxLevels = 10;
   colorize = false;
-  showLimitOnly = false;
+  showLimitsOnly = false;
 }

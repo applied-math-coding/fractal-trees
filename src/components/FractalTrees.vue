@@ -47,6 +47,10 @@
           <div class="option-label">Colorize:</div>
           <Checkbox v-model="treeParams.colorize" :binary="true" />
         </div>
+        <div class="option">
+          <div class="option-label">Show limits only:</div>
+          <Checkbox v-model="treeParams.showLimitsOnly" :binary="true" />
+        </div>
       </div>
       <div class="calc-button">
         <Button

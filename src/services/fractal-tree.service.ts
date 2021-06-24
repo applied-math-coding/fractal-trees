@@ -13,6 +13,24 @@ export class FractalTreeService {
   }
 
   paint(r: TreeNode, ctx: CanvasRenderingContext2D | null, c: HTMLCanvasElement, p: TreeParams) {
+    if (p.showLimitsOnly) {
+      this.paintLimitNodes(r, ctx, c, p);
+    } else {
+      this.paintBranches(r, ctx, c, p);
+    }
+  }
+
+  private paintLimitNodes(r: TreeNode, ctx: CanvasRenderingContext2D | null, c: HTMLCanvasElement, p: TreeParams) {
+    if (r.level < p.maxLevels - 1) {
+      return;
+    }
+    r.childNodes.forEach(n => {
+      p.colorize && (ctx.fillStyle = `hsl(${this.transformValueToHue(r.level, p.maxLevels)}, 50%, 50%)`);
+      ctx.fillRect(...this.transToCanvasCoords(n.point, c), 1, 1);
+    });
+  }
+
+  private paintBranches(r: TreeNode, ctx: CanvasRenderingContext2D | null, c: HTMLCanvasElement, p: TreeParams) {
     r.childNodes.forEach(tn => {
       if (p.colorize) {
         ctx.beginPath();
