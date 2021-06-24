@@ -32,8 +32,8 @@ export class FractalTreeService {
 
   private paintBranches(r: TreeNode, ctx: CanvasRenderingContext2D | null, c: HTMLCanvasElement, p: TreeParams) {
     r.childNodes.forEach(tn => {
+      ctx.beginPath();
       if (p.colorize) {
-        ctx.beginPath();
         ctx.strokeStyle = `hsl(${this.transformValueToHue(r.level, p.maxLevels)}, 50%, 50%)`;
       }
       ctx?.moveTo(...this.transToCanvasCoords(r.point, c));

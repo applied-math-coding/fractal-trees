@@ -9,6 +9,7 @@ import Button from 'primevue/button';
 import InputNumber from 'primevue/inputnumber';
 import Slider from 'primevue/slider';
 import Checkbox from 'primevue/checkbox';
+import ProgressBar from 'primevue/progressbar';
 
 
 const app = createApp(App);
@@ -17,4 +18,5 @@ app.component('Button', Button);
 app.component('InputNumber', InputNumber);
 app.component('Slider', Slider);
 app.component('Checkbox', Checkbox);
+app.component('ProgressBar', ProgressBar);
 app.mount('#app');

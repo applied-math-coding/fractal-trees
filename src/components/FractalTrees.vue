@@ -13,6 +13,7 @@
             showButtons
             :min="2"
             :max="5"
+            :disabled="calculating"
           />
         </div>
         <div class="option">
@@ -22,6 +23,7 @@
             showButtons
             :min="2"
             :max="20"
+            :disabled="calculating"
           />
         </div>
         <div class="option">
@@ -32,6 +34,7 @@
             :step="0.05"
             :min="0.1"
             :max="1.0"
+            :disabled="calculating"
           />
         </div>
         <div class="option">
@@ -41,15 +44,24 @@
             showButtons
             :min="1"
             :max="180"
+            :disabled="calculating"
           />
         </div>
         <div class="option">
           <div class="option-label">Colorize:</div>
-          <Checkbox v-model="treeParams.colorize" :binary="true" />
+          <Checkbox
+            v-model="treeParams.colorize"
+            :binary="true"
+            :disabled="calculating"
+          />
         </div>
         <div class="option">
           <div class="option-label">Show limits only:</div>
-          <Checkbox v-model="treeParams.showLimitsOnly" :binary="true" />
+          <Checkbox
+            v-model="treeParams.showLimitsOnly"
+            :binary="true"
+            :disabled="calculating"
+          />
         </div>
       </div>
       <div class="calc-button">
@@ -69,6 +81,9 @@
       <div class="number-nodes-positioner">
         <span class="number-nodes">{{ numberNodes }}</span>
         <span class="number-nodes-label"> nodes</span>
+      </div>
+      <div>
+        <ProgressBar class="p-mt-2" v-if="calculating" :value="progress" />
       </div>
     </div>
   </div>
@@ -90,13 +105,12 @@ export default defineComponent({
       treeParams: new TreeParams(),
       calculating: false,
       interrupted: false,
+      progress: 0,
     };
   },
   computed: {
     numberNodes(): string {
-      return new Intl.NumberFormat().format(
-        this.treeParams.numberBranches ** this.treeParams.maxLevels
-      );
+      return new Intl.NumberFormat().format(this.computeNumberNodes());
     },
     angleInDegree: {
       get(): number {
@@ -108,6 +122,12 @@ export default defineComponent({
     },
   },
   methods: {
+    computeNumberNodes(): number {
+      return (
+        (1 - this.treeParams.numberBranches ** this.treeParams.maxLevels) /
+        (1 - this.treeParams.numberBranches)
+      );
+    },
     handleStop() {
       this.interrupted = true;
     },
@@ -117,26 +137,35 @@ export default defineComponent({
       const c = this.$refs.canvas as HTMLCanvasElement;
       const ctx = c.getContext("2d");
       clearCanvas(c);
-      ctx?.beginPath();
       let lastPaintStopTime = new Date().getTime();
       const g = fractalTreeService.calculate(this.treeParams);
       let res: { value: TreeNode; done?: boolean };
+      this.progress = 0;
+      let nodeCounter = 0;
+      let numberNodes = this.computeNumberNodes();
+      await wait(); // keep air for conditional rendering
       while (!(res = g.next()).done) {
         fractalTreeService.paint(res.value, ctx, c, this.treeParams);
         const time = new Date().getTime();
         if (time - lastPaintStopTime > 500) {
-          await new Promise<void>((r) => setTimeout(() => r()));
+          await wait(); // keep air for stop-button
           lastPaintStopTime = time;
         }
         if (this.interrupted) {
           break;
         }
+        nodeCounter++;
+        this.progress = Math.floor((100 * nodeCounter) / numberNodes);
       }
       ctx?.stroke();
       this.calculating = false;
     },
   },
 });
+
+function wait(): Promise<void> {
+  return new Promise<void>((r) => setTimeout(() => r()));
+}
 
 function clearCanvas(c: HTMLCanvasElement) {
   const ctx = c.getContext("2d");
@@ -183,7 +212,8 @@ canvas {
   }
 
   .actions {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     grid-row: 1;
     padding: 20px 30px;
     border-left: 1px solid #cccccc;
