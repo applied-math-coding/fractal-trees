@@ -111,4 +111,4 @@
 
 
 <script lang="ts" src="./FractalTrees.ts"></script>
-<style scoped src="./FractalTrees.css"></style>
+<style lang="scss" scoped src="./FractalTrees.scss"></style>

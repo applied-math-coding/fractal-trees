@@ -76,7 +76,7 @@ export default defineComponent({
       let res: { value: TreeNode; done?: boolean };
       this.progress = 0;
       let nodeCounter = 0;
-      let numberNodes = this.computeNumberNodes();
+      const numberNodes = this.computeNumberNodes();
       await wait(); // keep air for conditional rendering
       while (!(res = g.next()).done) {
         fractalTreeService.paint(res.value, ctx, c, this.treeParams);
