@@ -18,6 +18,7 @@ export default defineComponent({
 :root {
   --primary-text-color: #2c3e50;
   --secondary-text-color: #9e9e9e;
+  --secondary-bg-color: #f9f9f9;
   --small-font: 0.8rem;
   --medium-font: 1.5rem;
   --large-font: 2rem;
