@@ -1,0 +1,107 @@
+\documentclass[17pt]{extarticle}
+%\usepackage[paperheight=4in]{geometry}
+\usepackage[top=1cm, bottom=1cm]{geometry}
+\pagestyle{empty} %no page numbering
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{condition*}{Condition}
+
+\setlength\parindent{0pt} %no indent
+
+\begin{document}
+Throughout this section we will denote by $\alpha$ the shrinkage factor of line segments and by $\beta$ the angle between those later. The limit set is denoted by $F$ and formally defined by
+$$
+F:=\{\lim_{n}\xi_n \ | \ \xi\in \mathcal{B}\}
+$$
+where $\mathcal{B}$ is the family of all branches starting at the root.
+	
+\begin{theorem*}
+	\textbf{Cardinality}\\
+	The cardinality of the limit is not larger than $\omega$ (infinity).
+\end{theorem*}
+\begin{proof}
+Each point in the limit is determined by at least one branch. Though in general several branches might share the same limit point. Thus the cardinality is not larger than that of all branches. The later can be computed by noting that each branch is uniquely determined by the family of its restrictions onto finite levels. For a tree with $n$ levels, where each node has b child-nodes, the number of branches is $b^n$. Therefore, the cardinality of all branches is exactly $\omega$.
+\end{proof}
+
+This theorem shows that the limit set cannot be open, since any open set in $R^2$ has cardinality of the continuum, that is $2^{\omega}$. Remember: $2^{\omega}>\omega$.
+
+\begin{theorem*}
+	\textbf{Boundedness}\\
+	The limit set always is bounded in $R^2$.
+\end{theorem*}
+\begin{proof}
+Consider a limit point $x$ and a branch $b=\{\xi_n \ | \ n\in\omega\}$ with $\lim_n \xi_n = x$. If $\alpha<1$ denotes the shrinking factor of the fractal tree, and $L$ the initial length of the first segment, then by triangle inequality we have
+$$
+|\xi_0 - \xi_n|\leq L\sum_i^n \alpha^i
+$$
+Here $|\cdot|$ denotes the Euclidean norm in $R^2$ and $\xi_0$ is the root of the tree.
+On the one hand, by continuity of norm, we have $|\xi_0-\xi_n| \rightarrow |\xi_0-x|$. On the other hand the series on the r.h.s is converging against some $B\in\mathbb{R}$,
+which shows
+$$
+|\xi_0 - x|\leq B
+$$
+Since $x$ has been chosen arbitrarily, this shows the entire limit set to be bounded.
+\end{proof}
+
+The last theorem shows together with the famous Heine-Borel theorem (\href{https://en.wikipedia.org/wiki/Heine\%E2\%80\%93Borel_theorem}{see here}), the limit set only can be discrete in case it is finite.
+
+\begin{theorem*} 
+	\textbf{Unique limits}\\
+	Let $F$ result from a dual tree, that is one where each node has two child nodes.
+	If we have the relation
+	\begin{equation} \label{unique_branch_relation}
+	\alpha<\frac{\sin(\beta/2)}{1+\sin(\beta/2)}
+	\end{equation}
+	then each branch has a unique limit.
+\end{theorem*}
+\begin{proof}
+	Let $x\in F$ and assume there are branches $(\xi_i)_i, (\eta_i)_i\in\mathcal{B}$ which both have $x$ as there limit. Because of the tree-structure, there must exist a maximal $n$ with $\xi_i=\eta_i$ for all $i\leq n$. This $n$ presents the level after which both branches starting being disjoint from each other. Up from this level both sub-branches (the left and right) are fully symmetric w.r.t the angle bisector. The idea is now to show that both branches cannot cross this bisector nor reach it in limit and hence cannot have the same limit as assumed. The following picture shall illustrate this situation:\\
+	\includegraphics[width=10cm]{unique_branch}
+	\\
+	The distance $d/2$ is given by 
+	$$
+	\frac{d}{2}=\alpha^{n}L\sin\left(\frac{\beta}{2}\right)
+	$$
+	The two sub-trees, the one starting at the left node $\xi_{n+1}$ and the other starting at the right node $\eta_{n+1}$, produce limits which in worst case have distance 
+	$$
+	L\sum_{i\geq n+1}\alpha^i
+	$$
+	from  $\xi_{n+1}$ or $\eta_{n+1}$ correspondingly and along $d$. That is, the distance of such limits to the angle bisector is minimally 
+	$$
+	\frac{d}{2}-L\sum_{i\geq n+1}\alpha^i
+	$$
+	In order to finish the proof, we just have to show, that this difference is positive. We compute
+	$$
+	\sum_{i\geq n+1}\alpha^i=\alpha^{n+1}\sum_{i=0}\alpha^i=\alpha^{n+1}\frac{1}{1-\alpha}=
+	\alpha^{n}\frac{\alpha}{1-\alpha}
+	$$
+	Using this and formula for $d/2$ we can formulate our targeted relation as
+	$$
+	\alpha^{n}\sin\left(\frac{\beta}{2}\right)>\alpha^n\frac{\alpha}{1-\alpha}
+	$$
+	which is equivalent to
+	$$
+	\sin\left(\frac{\beta}{2}\right)>\frac{\alpha}{1-\alpha}
+	$$
+	It is easy to see that this is equivalent with (\ref{unique_branch_relation}).
+	
+\end{proof}
+So, under the prerequisites of the preceding theorem, any $x\in F$ is in one to one correspondence with a branch. Similar results can be obtained for trees with more than two child nodes.
+
+
+
+\end{document}
+
+	
