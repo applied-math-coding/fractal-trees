@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7440 64-bit) (preloaded format=pdflatex 2020.5.26)  28 JUN 2021 13:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 2.9.7440 64-bit) (preloaded format=pdflatex 2020.5.26)  30 JUN 2021 14:12
 entering extended mode
 **./fractal-trees.tex
 (fractal-trees.tex
@@ -319,14 +319,14 @@ LaTeX Font Info:    ... okay on input line 23.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
 * h-part:(L,W,R)=(92.14519pt, 430.00462pt, 92.14519pt)
-* v-part:(T,H,B)=(28.45274pt, 738.0645pt, 28.45274pt)
+* v-part:(T,H,B)=(56.9055pt, 681.15898pt, 56.9055pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
 * \textwidth=430.00462pt
-* \textheight=738.0645pt
+* \textheight=681.15898pt
 * \oddsidemargin=19.8752pt
 * \evensidemargin=19.8752pt
-* \topmargin=-90.81725pt
+* \topmargin=-62.36449pt
 * \headheight=17.0pt
 * \headsep=30.0pt
 * \topskip=17.0pt
@@ -403,25 +403,30 @@ File: unique_branch.png Graphic file (type png)
 <use unique_branch.png>
 Package pdftex.def Info: unique_branch.png  used on input line 71.
 (pdftex.def)             Requested size: 284.52756pt x 383.25497pt.
- [2] [3 <./unique_branch.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 105.
-[4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 105.
+ [2] [3 <./unique_branch.png>] [4]
+Overfull \hbox (4.38434pt too wide) in paragraph at lines 110--112
+\OT1/cmr/m/n/17.28 Such an $\OML/cmm/m/it/17.28 M$ \OT1/cmr/m/n/17.28 ex-ists s
+ince both, the se-quence and se-ries are Cauchy.
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 116.
+[5]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 116.
  (fractal-trees.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 105.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 105.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 116.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 116.
 Package rerunfilecheck Info: File `fractal-trees.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 105.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 116.
  ) 
 Here is how much of TeX's memory you used:
- 6850 strings out of 480795
- 102402 string characters out of 2905357
- 369110 words of memory out of 3000000
+ 6851 strings out of 480795
+ 102408 string characters out of 2905357
+ 369112 words of memory out of 3000000
  22738 multiletter control sequences out of 15000+200000
  536850 words of font info for 41 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,5n,31p,656b,381s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 34i,5n,31p,881b,381s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Program 
 Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/Mi
@@ -431,9 +436,9 @@ pe1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbo
 ls/msbm10.pfb>
-Output written on fractal-trees.pdf (4 pages, 124485 bytes).
+Output written on fractal-trees.pdf (5 pages, 129137 bytes).
 PDF statistics:
- 65 PDF objects out of 1000 (max. 8388607)
- 6 named destinations out of 1000 (max. 500000)
+ 71 PDF objects out of 1000 (max. 8388607)
+ 7 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

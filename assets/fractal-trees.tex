@@ -1,6 +1,6 @@
 \documentclass[17pt]{extarticle}
 %\usepackage[paperheight=4in]{geometry}
-\usepackage[top=1cm, bottom=1cm]{geometry}
+\usepackage[top=2cm, bottom=2cm]{geometry}
 \pagestyle{empty} %no page numbering
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -21,7 +21,7 @@
 \setlength\parindent{0pt} %no indent
 
 \begin{document}
-Throughout this section we will denote by $\alpha$ the shrinkage factor of line segments and by $\beta$ the angle between those later. The limit set is denoted by $F$ and formally defined by
+Throughout this section we will denote by $\alpha$ the shrinkage factor of line segments, by $\beta$ the angle between those later and by $L$ the initial segment's length. The limit set is denoted by $F$ and formally defined by
 $$
 F:=\{\lim_{n}\xi_n \ | \ \xi\in \mathcal{B}\}
 $$
@@ -42,7 +42,7 @@ This theorem shows that the limit set cannot be open, since any open set in $R^2
 	The limit set always is bounded in $R^2$.
 \end{theorem*}
 \begin{proof}
-Consider a limit point $x$ and a branch $b=\{\xi_n \ | \ n\in\omega\}$ with $\lim_n \xi_n = x$. If $\alpha<1$ denotes the shrinking factor of the fractal tree, and $L$ the initial length of the first segment, then by triangle inequality we have
+Consider a limit point $x$ and a branch $b=\{\xi_n \ | \ n\in\omega\}$ with $\lim_n \xi_n = x$. By triangle inequality we have
 $$
 |\xi_0 - \xi_n|\leq L\sum_i^n \alpha^i
 $$
@@ -95,10 +95,21 @@ The last theorem shows together with the famous Heine-Borel theorem (\href{https
 	$$
 	\sin\left(\frac{\beta}{2}\right)>\frac{\alpha}{1-\alpha}
 	$$
-	It is easy to see that this is equivalent with (\ref{unique_branch_relation}).
-	
+	It is easy to see that this is equivalent with (\ref{unique_branch_relation}).	
 \end{proof}
-So, under the prerequisites of the preceding theorem, any $x\in F$ is in one to one correspondence with a branch. Similar results can be obtained for trees with more than two child nodes.
+So, under the prerequisites of preceding theorem, any $x\in F$ is in one to one correspondence with a branch. Similar results can be obtained for trees with more than two child nodes.
+
+\begin{theorem*}
+	\textbf{Compactness}\\
+	The limit set $F$ is closed and hence compact.
+\end{theorem*}
+\begin{proof}
+	The compactness follows from $F$ being bounded and closed. In order to show closeness let us consider any point $x\in\mathbb{R}^2$ which contains in each neighborhood a point from $F$. We will inductively construct a branch which has $x$ as limit and hence $x\in F$. The construction will be done for the case of a dual tree, but the more general case is done very similarly. Starting a the root one of both branches must have the property that it contains a sub-tree which has limit points arbitrary close to $x$. Repeating this selection on the next node and so on produces a branch $(\eta_n)_n$. Let us assume to the contrary that $x\neq\lim_n\eta_n$. Then there exists disjoint balls, $B_{\epsilon}(x)$ and $B_{\delta}(y)$, of $x$ resp. $y$. Now choose $M$ such that $\eta_n\in B_{\delta/2}(y)$ for all $n\geq M$ and moreover such that
+	$$
+	L\sum_{n>M}\alpha_n < \frac{\delta}{2}
+	$$
+	Such an $M$ exists since both, the sequence and series are Cauchy. The later condition actually tells that the sub-tree starting at $\eta_{M}$ entirely must lie within $B_{\delta}(y)$. But this is in contradiction with having constructed $(\eta_n)_n$ such that there exists a branch containing $\eta_M$ and having a limit in $B_{\epsilon}(x)$.
+\end{proof}
 
 
 
