@@ -12,3 +12,7 @@ yarn build
 rm -rf docs
 mkdir docs
 cp -r dist/* docs
+cd docs
+mkdir results
+cd ..
+cp -r results/* docs/results
